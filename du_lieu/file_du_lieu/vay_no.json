@@ -1,0 +1,42 @@
+[
+  {
+    "id": "VN_001",
+    "userId": "U_001",
+    "loai": "VAY",
+    "tenKhoanVay": "Vay mua xe trả góp",
+    "benDoiTac": "VPBank",
+    "soTienGoc": 300000000,
+    "laiSuatNam": 8.5,
+    "phuongThucTinhLai": "DU_NO_GIAM_DAN",
+    "kyHan": 36,
+    "ngayGiaiNgan": "2024-01-01T00:00:00",
+    "ngayDaoHan": "2026-12-31T00:00:00",
+    "trangThai": "DANG_VAY",
+    "daTraGoc": 50000000,
+    "daTraLai": 12750000,
+    "duNo": 250000000,
+    "lichTraNo": [
+      {
+        "kyThu": 1,
+        "ngayDenHan": "2024-02-01",
+        "gocPhaiTra": 8333333,
+        "laiPhaiTra": 2125000,
+        "tongPhaiTra": 10458333,
+        "duNoCuoiKy": 291666667,
+        "trangThai": "DA_TRA"
+      },
+      {
+        "kyThu": 2,
+        "ngayDenHan": "2024-03-01",
+        "gocPhaiTra": 8333333,
+        "laiPhaiTra": 2067708,
+        "tongPhaiTra": 10401041,
+        "duNoCuoiKy": 283333334,
+        "trangThai": "DA_TRA"
+      }
+    ],
+    "ghiChu": "Lãi suất cố định",
+    "ngayTao": "2024-01-01T10:00:00",
+    "ngayCapNhat": "2024-03-01T15:30:00"
+  }
+]

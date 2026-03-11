@@ -1,0 +1,34 @@
+[
+  {
+    "id": "GD_001",
+    "userId": "U_001",
+    "danhMuc": "an_uong",
+    "soTien": 50000,
+    "loai": "CHI",
+    "moTa": "Ăn trưa tại căng tin",
+    "ngayGiaoDich": "2024-03-11T12:00:00",
+    "phuongThuc": "TIEN_MAT",
+    "fileDinhKem": null,
+    "trangThai": "HOAN_THANH",
+    "loanId": null,
+    "duocPhanLoaiTuDong": true,
+    "ngayTao": "2024-03-11T12:05:00",
+    "ngayCapNhat": "2024-03-11T12:05:00"
+  },
+  {
+    "id": "GD_002",
+    "userId": "U_001",
+    "danhMuc": "luong",
+    "soTien": 10000000,
+    "loai": "THU",
+    "moTa": "Lương tháng 3",
+    "ngayGiaoDich": "2024-03-05T09:00:00",
+    "phuongThuc": "CHUYEN_KHOAN",
+    "fileDinhKem": "/files/salary_slip_mar.pdf",
+    "trangThai": "HOAN_THANH",
+    "loanId": null,
+    "duocPhanLoaiTuDong": false,
+    "ngayTao": "2024-03-05T09:10:00",
+    "ngayCapNhat": "2024-03-05T09:10:00"
+  }
+]

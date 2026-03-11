@@ -1,0 +1,36 @@
+{
+  "laiSuatNganHang": [
+    {
+      "nganHang": "Vietcombank",
+      "laiSuat": 5.5,
+      "kyHan": "12_THANG",
+      "ngayCapNhat": "2024-03-10T09:00:00"
+    },
+    {
+      "nganHang": "Techcombank",
+      "laiSuat": 6.0,
+      "kyHan": "12_THANG",
+      "ngayCapNhat": "2024-03-10T09:00:00"
+    }
+  ],
+  "giaVang": {
+    "SJC": 79800000,
+    "PNJ": 65800000,
+    "ngayCapNhat": "2024-03-11T08:30:00"
+  },
+  "danhMucMacDinh": [
+    "an_uong",
+    "di_chuyen",
+    "mua_sam",
+    "hoa_don",
+    "y_te",
+    "giao_duc",
+    "giai_tri",
+    "luong",
+    "thuong",
+    "dau_tu"
+  ],
+  "phiPhatQuaHan": 0.5,
+  "ngayCapNhat": "2024-03-11T10:00:00",
+  "nguoiCapNhat": "admin"
+}

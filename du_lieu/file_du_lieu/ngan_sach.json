@@ -1,0 +1,30 @@
+[
+  {
+    "id": "NS_001",
+    "userId": "U_001",
+    "danhMuc": "an_uong",
+    "hanMuc": 3000000,
+    "chuKy": "THANG",
+    "thang": 3,
+    "nam": 2024,
+    "daChi": 2500000,
+    "tyLeCanhBao": 70,
+    "vuotNganSach": false,
+    "ngayTao": "2024-03-01T00:00:00",
+    "ngayCapNhat": "2024-03-11T15:30:00"
+  },
+  {
+    "id": "NS_002",
+    "userId": "U_001",
+    "danhMuc": "di_chuyen",
+    "hanMuc": 1000000,
+    "chuKy": "THANG",
+    "thang": 3,
+    "nam": 2024,
+    "daChi": 800000,
+    "tyLeCanhBao": 70,
+    "vuotNganSach": false,
+    "ngayTao": "2024-03-01T00:00:00",
+    "ngayCapNhat": "2024-03-11T15:30:00"
+  }
+]
