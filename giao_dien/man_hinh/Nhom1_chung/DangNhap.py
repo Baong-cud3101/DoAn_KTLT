@@ -47,12 +47,14 @@ class DangNhapUI:
             width=20,
             command=self.login
         ).pack(pady=15)
-        tk.Label(
-            right,
-            text="Quên mật khẩu",
-            fg="blue",
-            bg="white"
-        ).pack()
+  tk.Button(
+    right,
+    text="Quên mật khẩu",
+    fg="blue",
+    bg="white",
+    bd=0,
+    command=self.open_forgot
+).pack()
         register_frame = tk.Frame(right, bg="white")
         register_frame.pack(pady=10)
         tk.Label(register_frame, text="Chưa có tài khoản ?", bg="white").pack(side="left")
