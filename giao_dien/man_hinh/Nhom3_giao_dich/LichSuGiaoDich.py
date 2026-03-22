@@ -1,74 +1,113 @@
 import tkinter as tk
-from tkinter import ttk
-
+from tkinter import ttk, messagebox
+import json
+import os
 
 class LichSuGiaoDichUI:
-
-    def __init__(self, root):
+    def __init__(self, root, user_id="user_001"):
+        self.root = root
+        self.user_id = user_id
         frame = tk.Frame(root, bg="white")
         frame.pack(fill="both", expand=True)
-
         tk.Label(
             frame,
             text="Lịch sử giao dịch",
             font=("Arial", 20, "bold"),
             bg="white"
         ).pack(pady=20)
-
         filterbar = tk.Frame(frame, bg="white")
         filterbar.pack(pady=10)
-        tk.Entry(filterbar, width=25).pack(side="left", padx=5)
+        self.search_entry = tk.Entry(filterbar, width=25)
+        self.search_entry.pack(side="left", padx=5)
         tk.Button(
             filterbar,
             text="Tìm kiếm",
-            width=12
-        ).pack(side="left", padx=5)
-        tk.Button(
-            filterbar,
-            text="Theo thời gian",
-            width=14
-        ).pack(side="left", padx=5)
-        tk.Button(
-            filterbar,
-            text="Theo danh mục",
-            width=14
+            width=12,
+            command=self.tim_kiem
         ).pack(side="left", padx=5)
         tk.Button(
             filterbar,
             text="Xuất Excel",
-            width=12
+            width=12,
+            command=self.xuat_excel
         ).pack(side="left", padx=5)
-
+        tk.Button(
+            filterbar,
+            text="Quay lại",
+            width=12,
+            command=self.back
+        ).pack(side="left", padx=5)
         table_frame = tk.Frame(frame)
         table_frame.pack(fill="both", expand=True, padx=40, pady=20)
         columns = ("Ngày", "Mô tả", "Danh mục", "Số tiền")
-        tree = ttk.Treeview(
+        self.tree = ttk.Treeview(
             table_frame,
             columns=columns,
             show="headings"
         )
-        tree.heading("Ngày", text="Ngày")
-        tree.heading("Mô tả", text="Mô tả")
-        tree.heading("Danh mục", text="Danh mục")
-        tree.heading("Số tiền", text="Số tiền")
-        tree.column("Ngày", width=120)
-        tree.column("Mô tả", width=220)
-        tree.column("Danh mục", width=150)
-        tree.column("Số tiền", width=120, anchor="e")
 
+        for col in columns:
+            self.tree.heading(col, text=col)
+        self.tree.column("Ngày", width=120)
+        self.tree.column("Mô tả", width=220)
+        self.tree.column("Danh mục", width=150)
+        self.tree.column("Số tiền", width=120, anchor="e")
         scrollbar = ttk.Scrollbar(
             table_frame,
             orient="vertical",
-            command=tree.yview
+            command=self.tree.yview
         )
-        tree.configure(yscrollcommand=scrollbar.set)
+        self.tree.configure(yscrollcommand=scrollbar.set)
         scrollbar.pack(side="right", fill="y")
-        tree.pack(fill="both", expand=True)
-        data = [
-            ("01/03/2026", "Ăn trưa", "Ăn uống", "-50,000"),
-            ("02/03/2026", "Lương tháng", "Thu nhập", "+10,000,000"),
-            ("03/03/2026", "Cafe", "Ăn uống", "-30,000"),
-            ("04/03/2026", "Mua sách", "Giải trí", "-120,000"),
+        self.tree.pack(fill="both", expand=True)
+        self.load_data()
+
+    def load_data(self):
+        self.tree.delete(*self.tree.get_children())
+        try:
+            with open("transactions.json", "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except:
+            data = []
+        self.full_data = [d for d in data if d.get("user_id") == self.user_id]
+        self.hien_thi(self.full_data)
+        
+    def hien_thi(self, data):
+        self.tree.delete(*self.tree.get_children())
+        for d in data:
+            self.tree.insert("", tk.END, values=(
+                d.get("thoi_gian", ""),
+                d.get("mo_ta", ""),
+                d.get("danh_muc", ""),
+                d.get("so_tien", "")
+            ))
+
+    def tim_kiem(self):
+        keyword = self.search_entry.get().lower()
+        filtered = [
+            d for d in self.full_data
+            if keyword in d.get("mo_ta", "").lower()
         ]
-        for row in data:
-            tree.insert("", tk.END, values=row)
+        self.hien_thi(filtered)
+
+    def xuat_excel(self):
+        try:
+            from xuat_bao_cao.TaoExcel import TaoExcel
+            exporter = TaoExcel()
+            data = {
+                "transactions": self.full_data,
+                "summary": {}
+            }
+            chart = {}
+            file_bytes = exporter.tao(data, chart)
+            with open("report.xlsx", "wb") as f:
+                f.write(file_bytes)
+            messagebox.showinfo("Thành công", "Đã xuất Excel")
+        except Exception as e:
+            messagebox.showerror("Lỗi", str(e))
+
+    def back(self):
+        from giao_dien.man_hinh.Nhom1_chung.Trangchu import TrangChuUI
+        for w in self.root.winfo_children():
+            w.destroy()
+        TrangChuUI(self.root, "User")
