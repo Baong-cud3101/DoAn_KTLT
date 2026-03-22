@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 import json
 from TrangChu import TrangChuUI
-from DangKy import DangKyUI
+def open_register(self):
+    from DangKy import DangKyUI
 
 
 class DangNhapUI:
