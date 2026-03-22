@@ -2,21 +2,17 @@ import tkinter as tk
 from tkinter import messagebox
 import json
 
-
 class QuenMatKhauUI:
     def __init__(self, root):
-
         self.root = root
         frame = tk.Frame(root, bg="white", padx=80, pady=60)
         frame.pack(fill="both", expand=True)
-
         tk.Label(
             frame,
             text="ĐẶT LẠI MẬT KHẨU CỦA BẠN",
             font=("Arial", 20, "bold"),
             bg="white"
         ).pack(anchor="w", pady=10)
-
         tk.Label(
             frame,
             text="CHÚNG TÔI SẼ GỬI CHO BẠN MỘT EMAIL ĐỂ CÀI LẠI MẬT KHẨU.",
@@ -28,7 +24,6 @@ class QuenMatKhauUI:
             text="EMAIL*",
             bg="white"
         ).pack(anchor="w", pady=10)
-
         self.entry_email = tk.Entry(frame, width=60)
         self.entry_email.pack(ipady=8)
         tk.Button(
@@ -40,7 +35,6 @@ class QuenMatKhauUI:
             height=2,
             command=self.send_email
         ).pack(pady=20)
-
         tk.Button(
             frame,
             text="HUỶ",
@@ -48,16 +42,13 @@ class QuenMatKhauUI:
             height=2,
             command=self.back_login
         ).pack()
-
         bottom = tk.Frame(frame, bg="white")
         bottom.pack(pady=30)
-
         tk.Label(
             bottom,
             text="ĐÃ CÓ TÀI KHOẢN?",
             bg="white"
         ).pack(side="left")
-
         tk.Button(
             bottom,
             text="ĐĂNG NHẬP",
@@ -85,7 +76,7 @@ class QuenMatKhauUI:
         messagebox.showerror("Lỗi", "Email không tồn tại")
 
     def back_login(self):
-        from DangNhap import DangNhapUI
+        from giao_dien.man_hinh.Nhom1_chung.DangNhap import DangNhapUI
         for w in self.root.winfo_children():
             w.destroy()
         DangNhapUI(self.root)
