@@ -85,7 +85,11 @@ class DangNhapUI:
         for w in self.root.winfo_children():
             w.destroy()
         DangKyUI(self.root)
-
+def open_forgot(self):
+        from doimatkhau import QuenMatKhauUI
+        for w in self.root.winfo_children():
+            w.destroy()
+        QuenMatKhauUI(self.root)
 
 if __name__ == "__main__":
     root = tk.Tk()
