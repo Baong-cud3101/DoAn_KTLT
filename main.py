@@ -1,5 +1,5 @@
 import tkinter as tk
-from DangNhap import DangNhapUI
+from giao_dien.man_hinh.Nhom1_chung.DangNhap import DangNhapUI
 
 def khoi_dong_he_thong():
     root = tk.Tk()
