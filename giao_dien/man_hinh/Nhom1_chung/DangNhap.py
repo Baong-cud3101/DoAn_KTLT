@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from dieu_khien.DangNhap_Controller import DieuKhienDangNhap
-from TrangChu import TrangChuUI
-from DangKy import DangKyUI
+from giao_dien.man_hinh.Nhom1_chung.TrangChu import TrangChuUI
+from giao_dien.man_hinh.Nhom1_chung.DangKy import DangKyUI
 class DangNhapUI:
     def __init__(self, root):
         self.root = root
@@ -55,19 +55,14 @@ class DangNhapUI:
     def login(self):
         email = self.entry_email.get()
         password = self.entry_pass.get()
-        du_lieu = {
-            "Email": email,
-            "MatKhau": password
-        }
-        ket_qua = self.controller.dang_nhap(du_lieu)
+        ket_qua = self.controller.dang_nhap(email, password)
         if ket_qua.get("success"):
-            token = ket_qua.get("token")
             messagebox.showinfo("Thành công", "Đăng nhập thành công")
             for w in self.root.winfo_children():
                 w.destroy()
             TrangChuUI(self.root, email)
             return
-        message = ket_qua.get("message", "Lỗi không xác định")
+        message = ket_qua.get("message", "")
         if message == "TAI_KHOAN_BI_KHOA":
             messagebox.showerror("Lỗi", "Tài khoản đã bị khóa")
         elif message == "SAI_MAT_KHAU":
