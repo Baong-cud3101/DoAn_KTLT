@@ -1,19 +1,16 @@
 import tkinter as tk
 from tkinter import messagebox
-import json
-from giao_dien.man_hinh.Nhom1_chung.DangKy import DangKyUI
-from giao_dien.man_hinh.Nhom1_chung.Trangchu import TrangChuUI
-
-
+from dieu_khien.DangNhap_Controller import DieuKhienDangNhap
+from TrangChu import TrangChuUI
+from DangKy import DangKyUI
 class DangNhapUI:
     def __init__(self, root):
         self.root = root
-
+        self.controller = DieuKhienDangNhap()
         main = tk.Frame(root)
         main.pack(fill="both", expand=True)
         left = tk.Frame(main, bg="#1cc5d8", width=400)
         left.pack(side="left", fill="y")
-
         tk.Label(
             left,
             text="LOGO",
@@ -21,39 +18,32 @@ class DangNhapUI:
             bg="#1cc5d8",
             fg="white"
         ).place(relx=0.5, rely=0.5, anchor="center")
-
         right = tk.Frame(main, bg="white", padx=40, pady=40)
         right.pack(side="right", expand=True)
-
         tk.Label(
             right,
             text="Đăng nhập",
             font=("Arial", 22, "bold"),
             bg="white"
         ).pack(pady=20)
-
-        tk.Label(right, text="Email hoặc tên đăng nhập", bg="white").pack(anchor="w")
+        tk.Label(right, text="Email", bg="white").pack(anchor="w")
         self.entry_email = tk.Entry(right, width=35)
         self.entry_email.pack(pady=5)
-
         tk.Label(right, text="Mật khẩu", bg="white").pack(anchor="w")
         self.entry_pass = tk.Entry(right, width=35, show="*")
         self.entry_pass.pack(pady=5)
-
         tk.Button(
             right,
             text="Đăng nhập",
             width=20,
             command=self.login
         ).pack(pady=15)
-  tk.Button(
-    right,
-    text="Quên mật khẩu",
-    fg="blue",
-    bg="white",
-    bd=0,
-    command=self.open_forgot
-).pack()
+        tk.Label(
+            right,
+            text="Quên mật khẩu",
+            fg="blue",
+            bg="white"
+        ).pack()
         register_frame = tk.Frame(right, bg="white")
         register_frame.pack(pady=10)
         tk.Label(register_frame, text="Chưa có tài khoản ?", bg="white").pack(side="left")
@@ -62,38 +52,37 @@ class DangNhapUI:
             text="Đăng ký",
             command=self.open_register
         ).pack(side="left")
-
     def login(self):
         email = self.entry_email.get()
         password = self.entry_pass.get()
-        try:
-            with open("users.json", "r") as f:
-                data = json.load(f)
-        except:
-            messagebox.showerror("Lỗi", "Chưa có tài khoản nào")
+        du_lieu = {
+            "Email": email,
+            "MatKhau": password
+        }
+        ket_qua = self.controller.dang_nhap(du_lieu)
+        if ket_qua.get("success"):
+            token = ket_qua.get("token")
+            messagebox.showinfo("Thành công", "Đăng nhập thành công")
+            for w in self.root.winfo_children():
+                w.destroy()
+            TrangChuUI(self.root, email)
             return
-        for user in data:
-            if user["email"] == email and user["password"] == password:
-                for w in self.root.winfo_children():
-                    w.destroy()
-                TrangChuUI(self.root, user["name"])
-                return
-        messagebox.showerror("Lỗi", "Sai thông tin đăng nhập")
-
+        message = ket_qua.get("message", "Lỗi không xác định")
+        if message == "TAI_KHOAN_BI_KHOA":
+            messagebox.showerror("Lỗi", "Tài khoản đã bị khóa")
+        elif message == "SAI_MAT_KHAU":
+            messagebox.showerror("Lỗi", "Sai mật khẩu")
+        elif message == "KHONG_TON_TAI":
+            messagebox.showerror("Lỗi", "Tài khoản không tồn tại")
+        else:
+            messagebox.showerror("Lỗi", message)
     def open_register(self):
         for w in self.root.winfo_children():
             w.destroy()
         DangKyUI(self.root)
-def open_forgot(self):
-        from doimatkhau import QuenMatKhauUI
-        for w in self.root.winfo_children():
-            w.destroy()
-        QuenMatKhauUI(self.root)
-
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Finance App")
     root.geometry("1000x600")
     DangNhapUI(root)
-
     root.mainloop()
