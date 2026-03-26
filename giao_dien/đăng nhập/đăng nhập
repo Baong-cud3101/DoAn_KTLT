@@ -1,0 +1,363 @@
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtGraphicalEffects 1.15
+
+ApplicationWindow {
+    id: mainWindow
+    width: 500
+    height: 700
+    visible: true
+    title: "Financial Architect"
+    color: "#FFFFFF"
+    
+    // Font loading
+    FontLoader {
+        id: mainFont
+        source: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    }
+    
+    ScrollView {
+        anchors.fill: parent
+        contentWidth: parent.width
+        clip: true
+        ScrollBar.vertical.policy: ScrollBar.AsNeeded
+        
+        ColumnLayout {
+            width: parent.width
+            spacing: 0
+            
+            // Header Section
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 200
+                color: "#0A2540"
+                
+                ColumnLayout {
+                    anchors.fill: parent
+                    anchors.margins: 40
+                    spacing: 15
+                    
+                    Text {
+                        text: "Financial Architect"
+                        font.pixelSize: 28
+                        font.bold: true
+                        font.family: "Inter"
+                        color: "#FFFFFF"
+                        Layout.alignment: Qt.AlignLeft
+                    }
+                    
+                    Text {
+                        text: "Làm chủ tài chính của bạn."
+                        font.pixelSize: 16
+                        font.family: "Inter"
+                        color: "#E0E0E0"
+                        Layout.alignment: Qt.AlignLeft
+                        Layout.topMargin: 5
+                    }
+                    
+                    Text {
+                        text: "Hệ thống quản lý tài chính thông minh giúp bạn hoạch định tương lai vững chắc và đạt được sự tự do tài chính."
+                        font.pixelSize: 14
+                        font.family: "Inter"
+                        color: "#B0B0B0"
+                        wrapMode: Text.WordWrap
+                        Layout.alignment: Qt.AlignLeft
+                        Layout.fillWidth: true
+                        Layout.topMargin: 10
+                    }
+                }
+            }
+            
+            // Main Content
+            Item {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 500
+                
+                ColumnLayout {
+                    anchors.fill: parent
+                    anchors.margins: 40
+                    spacing: 25
+                    
+                    // Welcome Section
+                    ColumnLayout {
+                        spacing: 8
+                        
+                        Text {
+                            text: "Chào mừng trở lại"
+                            font.pixelSize: 24
+                            font.bold: true
+                            font.family: "Inter"
+                            color: "#1A1A1A"
+                        }
+                        
+                        Text {
+                            text: "Vui lòng đăng nhập để quản lý tài khoản của bạn."
+                            font.pixelSize: 14
+                            font.family: "Inter"
+                            color: "#666666"
+                        }
+                    }
+                    
+                    // Email Field
+                    ColumnLayout {
+                        spacing: 8
+                        
+                        Text {
+                            text: "Email"
+                            font.pixelSize: 14
+                            font.family: "Inter"
+                            font.weight: Font.Medium
+                            color: "#333333"
+                        }
+                        
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 50
+                            border.width: 1
+                            border.color: "#E0E0E0"
+                            radius: 8
+                            color: "#FFFFFF"
+                            
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.margins: 12
+                                spacing: 8
+                                
+                                Text {
+                                    text: "example@email.com"
+                                    font.pixelSize: 14
+                                    font.family: "Inter"
+                                    color: "#999999"
+                                    Layout.fillWidth: true
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Password Field
+                    ColumnLayout {
+                        spacing: 8
+                        
+                        Text {
+                            text: "Mật khẩu"
+                            font.pixelSize: 14
+                            font.family: "Inter"
+                            font.weight: Font.Medium
+                            color: "#333333"
+                        }
+                        
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 50
+                            border.width: 1
+                            border.color: "#E0E0E0"
+                            radius: 8
+                            color: "#FFFFFF"
+                            
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.margins: 12
+                                spacing: 8
+                                
+                                Text {
+                                    text: "●●●●●●●●"
+                                    font.pixelSize: 14
+                                    font.family: "Inter"
+                                    color: "#666666"
+                                    Layout.fillWidth: true
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Forgot Password Link
+                    Text {
+                        text: "Quên mật khẩu?"
+                        font.pixelSize: 13
+                        font.family: "Inter"
+                        color: "#0A2540"
+                        Layout.alignment: Qt.AlignRight
+                        Layout.fillWidth: true
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                console.log("Forgot password clicked")
+                            }
+                        }
+                    }
+                    
+                    // Login Button
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        radius: 8
+                        color: "#0A2540"
+                        
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Đăng nhập"
+                            font.pixelSize: 16
+                            font.bold: true
+                            font.family: "Inter"
+                            color: "#FFFFFF"
+                        }
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                console.log("Login clicked")
+                            }
+                        }
+                    }
+                    
+                    // Divider
+                    RowLayout {
+                        spacing: 10
+                        Layout.fillWidth: true
+                        
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 1
+                            color: "#E0E0E0"
+                        }
+                        
+                        Text {
+                            text: "HOẶC ĐĂNG NHẬP VỚI"
+                            font.pixelSize: 12
+                            font.family: "Inter"
+                            color: "#999999"
+                        }
+                        
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 1
+                            color: "#E0E0E0"
+                        }
+                    }
+                    
+                    // Google Login Button
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        radius: 8
+                        border.width: 1
+                        border.color: "#E0E0E0"
+                        color: "#FFFFFF"
+                        
+                        RowLayout {
+                            anchors.centerIn: parent
+                            spacing: 10
+                            
+                            Rectangle {
+                                width: 24
+                                height: 24
+                                radius: 12
+                                color: "#4285F4"
+                                
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "G"
+                                    font.pixelSize: 16
+                                    font.bold: true
+                                    color: "#FFFFFF"
+                                }
+                            }
+                            
+                            Text {
+                                text: "Google"
+                                font.pixelSize: 14
+                                font.family: "Inter"
+                                color: "#333333"
+                            }
+                        }
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                console.log("Google login clicked")
+                            }
+                        }
+                    }
+                    
+                    // Register Link
+                    RowLayout {
+                        spacing: 5
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: 10
+                        
+                        Text {
+                            text: "Chưa có tài khoản?"
+                            font.pixelSize: 14
+                            font.family: "Inter"
+                            color: "#666666"
+                        }
+                        
+                        Text {
+                            text: "Đăng ký tài khoản mới"
+                            font.pixelSize: 14
+                            font.family: "Inter"
+                            font.bold: true
+                            color: "#0A2540"
+                            
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    console.log("Register clicked")
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Footer Links
+                    RowLayout {
+                        spacing: 20
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: 30
+                        
+                        Text {
+                            text: "Trợ giúp"
+                            font.pixelSize: 12
+                            font.family: "Inter"
+                            color: "#999999"
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {}
+                            }
+                        }
+                        
+                        Text {
+                            text: "Quyền riêng tư"
+                            font.pixelSize: 12
+                            font.family: "Inter"
+                            color: "#999999"
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {}
+                            }
+                        }
+                        
+                        Text {
+                            text: "Việt Nam (VN)"
+                            font.pixelSize: 12
+                            font.family: "Inter"
+                            color: "#999999"
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
