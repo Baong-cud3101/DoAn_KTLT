@@ -2,7 +2,7 @@ class TaoPDF:
     def tao(self, du_lieu: dict, bieu_do: dict) -> bytes: pass
     def xuat_mau(self, mau_van_ban: str, du_lieu: dict) -> str: pass
     def nhung_bieu_do(self, hinh_anh_bieu_do: bytes) -> bytes: pass
-        from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
