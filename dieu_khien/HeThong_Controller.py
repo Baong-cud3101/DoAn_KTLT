@@ -29,3 +29,9 @@ class DieuKhienHeThong:
         except Exception as e:
             return {"success": False, "message": str(e)}
         return {"success": True}
+def dang_xuat(self, ma_nguoi_dung: str, ma_xac_thuc: str) -> dict:
+    try:
+        self.xu_ly.xoa_phien(ma_nguoi_dung, ma_xac_thuc)
+        return {"success": True}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
