@@ -2,11 +2,14 @@ import re
 
 class KiemTra:
     @staticmethod
-    def la_email_hop_le(email):
-        pattern = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
+    def hop_le_email(email):
+        pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
         return re.match(pattern, email) is not None
 
     @staticmethod
-    def la_mat_khau_manh(password):
-        # Ít nhất 6 ký tự
-        return len(password) >= 6
+    def hop_le_so_tien(so_tien_str):
+        try:
+            val = float(so_tien_str)
+            return val > 0
+        except ValueError:
+            return False

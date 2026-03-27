@@ -1,66 +1,26 @@
-#class LuuTruNganSach:
-    #DUONG_DAN_TEP: str = 'du_lieu/file_du_lieu/ngan_sach.json'
-    #def lay_theo_danh_muc(self, ma_nguoi_dung: str, danh_muc: str) -> dict: pass
-    #def luu(self, ngan_sach: dict): pass
-    #def cap_nhat_da_chi(self, ma_nguoi_dung: str, danh_muc: str, so_tien_thay_doi: float): pass
+from du_lieu.quan_ly_file.DocGhiJson import DocGhiJson
+from du_lieu.quan_ly_file.DuongDanFile import DuongDanFile
 
-import json
-import os
-import uuid
 class LuuTruNganSach:
-    DUONG_DAN_TEP: str = 'du_lieu/file_du_lieu/ngan_sach.json'
     def __init__(self):
-        os.makedirs(os.path.dirname(self.DUONG_DAN_TEP), exist_ok=True)
+        self.file_path = DuongDanFile.lay_duong_dan('ngan_sach.json')
 
-        if not os.path.exists(self.DUONG_DAN_TEP):
-            with open(self.DUONG_DAN_TEP, "w", encoding="utf-8") as f:
-                json.dump([], f)
+    def lay_tat_ca(self):
+        return DocGhiJson.doc_file(self.file_path)
 
-    def doc_tat_ca(self) -> list:
-        try:
-            with open(self.DUONG_DAN_TEP, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except:
-            return []
+    def lay_ngan_sach_theo_thang(self, thang, nam):
+        tat_ca = self.lay_tat_ca()
+        return [ns for ns in tat_ca if ns.get('thang') == thang and ns.get('nam') == nam]
 
-    def ghi_tat_ca(self, du_lieu: list):
-        with open(self.DUONG_DAN_TEP, "w", encoding="utf-8") as f:
-            json.dump(du_lieu, f, indent=4, ensure_ascii=False)
-
-    def lay_theo_danh_muc(self, ma_nguoi_dung: str, danh_muc: str) -> dict | None:
-        danh_sach = self.doc_tat_ca()
-        for ns in danh_sach:
-            if ns.get("MaND") != ma_nguoi_dung:
-                continue
-            for muc in ns.get("DanhMuc", []):
-                if muc.get("MaDM") == danh_muc:
-                    return muc
-        return None
-
-    def luu(self, ngan_sach: dict):
-        danh_sach = self.doc_tat_ca()
-        if "MaNS" not in ngan_sach:
-            ngan_sach["MaNS"] = "NS_" + str(uuid.uuid4())[:8]
+    def luu_ngan_sach(self, ngan_sach_moi):
+        danh_sach = self.lay_tat_ca()
+        # Cập nhật nếu đã tồn tại, thêm mới nếu chưa
         for i, ns in enumerate(danh_sach):
-            if ns.get("MaND") == ngan_sach.get("MaND"):
-                danh_sach[i] = ngan_sach
-                self.ghi_tat_ca(danh_sach)
+            if ns.get('thang') == ngan_sach_moi.get('thang') and \
+               ns.get('nam') == ngan_sach_moi.get('nam') and \
+               ns.get('danh_muc') == ngan_sach_moi.get('danh_muc'):
+                danh_sach[i] = ngan_sach_moi
+                DocGhiJson.ghi_file(self.file_path, danh_sach)
                 return
-        danh_sach.append(ngan_sach)
-        self.ghi_tat_ca(danh_sach)
-
-    def cap_nhat_da_chi(self, ma_nguoi_dung: str, danh_muc: str, so_tien_thay_doi: float):
-        danh_sach = self.doc_tat_ca()
-        for ns in danh_sach:
-            if ns.get("MaND") != ma_nguoi_dung:
-                continue
-            for muc in ns.get("DanhMuc", []):
-                if muc.get("MaDM") != danh_muc:
-                    continue
-                if "DaChi" not in muc:
-                    muc["DaChi"] = 0
-                muc["DaChi"] += so_tien_thay_doi
-                if muc["DaChi"] < 0:
-                    muc["DaChi"] = 0
-                self.ghi_tat_ca(danh_sach)
-                return
+        danh_sach.append(ngan_sach_moi)
+        DocGhiJson.ghi_file(self.file_path, danh_sach)

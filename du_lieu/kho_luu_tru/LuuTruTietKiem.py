@@ -1,5 +1,14 @@
+from du_lieu.quan_ly_file.DocGhiJson import DocGhiJson
+from du_lieu.quan_ly_file.DuongDanFile import DuongDanFile
+
 class LuuTruTietKiem:
-    DUONG_DAN_TEP: str = 'du_lieu/file_du_lieu/tiet_kiem.json'
-    def tim_tat_ca(self, ma_nguoi_dung: str) -> list: pass
-    def luu(self, khoan_tiet_kiem: dict): pass
-    def cap_nhat(self, ma_dinh_danh: str, truong_du_lieu: dict): pass
+    def __init__(self):
+        self.file_path = DuongDanFile.lay_duong_dan('tiet_kiem.json')
+
+    def lay_danh_sach(self):
+        return DocGhiJson.doc_file(self.file_path)
+
+    def luu_so_tiet_kiem(self, so_tiet_kiem):
+        danh_sach = self.lay_danh_sach()
+        danh_sach.append(so_tiet_kiem)
+        DocGhiJson.ghi_file(self.file_path, danh_sach)
