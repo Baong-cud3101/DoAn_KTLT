@@ -1,18 +1,15 @@
-# du_lieu/quan_ly_file/DuongDanFile.py
-from pathlib import Path
+import os
 
-# PROJECT_KTLT/du_lieu/quan_ly_file/DuongDanFile.py
-# parents[2] = PROJECT_KTLT/
-ROOT = Path(__file__).resolve().parents[2]
+class DuongDanFile:
+    # Thư mục gốc của dữ liệu
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    DATA_FOLDER = os.path.join(BASE_DIR, "file_du_lieu")
 
-# Thư mục chứa file JSON
-DU_LIEU = ROOT / "du_lieu" / "file_du_lieu"
-
-# 7 file JSON
-NGUOI_DUNG = DU_LIEU / "nguoi_dung.json"
-GIAO_DICH = DU_LIEU / "giao_dich.json"
-NGAN_SACH = DU_LIEU / "ngan_sach.json"
-TIET_KIEM = DU_LIEU / "tiet_kiem.json"
-DAU_TU = DU_LIEU / "dau_tu.json"
-VAY_NO = DU_LIEU / "vay_no.json"
-CAU_HINH = DU_LIEU / "cau_hinh.json"
+    # Đường dẫn cụ thể tới từng tệp JSON
+    NGUOI_DUNG = os.path.join(DATA_FOLDER, "nguoi_dung.json")
+    GIAO_DICH = os.path.join(DATA_FOLDER, "giao_dich.json")
+    NGAN_SACH = os.path.join(DATA_FOLDER, "ngan_sach.json")
+    VAY_NO = os.path.join(DATA_FOLDER, "vay_no.json")
+    TIET_KIEM = os.path.join(DATA_FOLDER, "tiet_kiem.json")
+    DAU_TU = os.path.join(DATA_FOLDER, "dau_tu.json")
+    CAU_HINH = os.path.join(DATA_FOLDER, "cau_hinh.json")
