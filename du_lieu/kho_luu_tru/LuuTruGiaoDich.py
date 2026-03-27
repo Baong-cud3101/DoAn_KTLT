@@ -1,13 +1,12 @@
-class LuuTruGiaoDich:
-    DUONG_DAN_TEP: str = 'du_lieu/file_du_lieu/giao_dich.json'
-    def loc_du_lieu(self, ma_nguoi_dung: str, bo_loc: dict) -> list: pass
-    def luu(self, giao_dich: dict) -> str: pass
-    def luu_hang_loat(self, danh_sach_giao_dich: list) -> int: pass
-    def cap_nhat(self, ma_dinh_danh: str, truong_du_lieu: dict) -> bool: pass
-    def xoa(self, ma_dinh_danh: str) -> bool: pass
-    def tim_khoan_vay_theo_ma_giao_dich(self, ma_dinh_danh: str) -> dict | None: pass
-    def lay_theo_danh_muc(self, ma_nguoi_dung: str, danh_muc: str, ky_han: str) -> list: pass
-
+#class LuuTruGiaoDich:
+    #DUONG_DAN_TEP: str = 'du_lieu/file_du_lieu/giao_dich.json'
+    #def loc_du_lieu(self, ma_nguoi_dung: str, bo_loc: dict) -> list: pass
+    #def luu(self, giao_dich: dict) -> str: pass
+    #def luu_hang_loat(self, danh_sach_giao_dich: list) -> int: pass
+    #def cap_nhat(self, ma_dinh_danh: str, truong_du_lieu: dict) -> bool: pass
+    #def xoa(self, ma_dinh_danh: str) -> bool: pass
+    #def tim_khoan_vay_theo_ma_giao_dich(self, ma_dinh_danh: str) -> dict | None: pass
+    #def lay_theo_danh_muc(self, ma_nguoi_dung: str, danh_muc: str, ky_han: str) -> list: pass
 
 
 import json
@@ -44,19 +43,16 @@ class LuuTruGiaoDich:
                 continue
             ket_qua.append(gd)
         return ket_qua
-
     def luu(self, giao_dich: dict) -> str:
         danh_sach = self.doc_tat_ca()
         danh_sach.append(giao_dich)
         self.ghi_tat_ca(danh_sach)
         return giao_dich.get("MaGD")
-
     def luu_hang_loat(self, danh_sach_giao_dich: list) -> int:
         danh_sach = self.doc_tat_ca()
         danh_sach.extend(danh_sach_giao_dich)
         self.ghi_tat_ca(danh_sach)
         return len(danh_sach_giao_dich)
-
     def cap_nhat(self, ma_dinh_danh: str, truong_du_lieu: dict) -> bool:
         danh_sach = self.doc_tat_ca()
         for gd in danh_sach:
@@ -65,20 +61,26 @@ class LuuTruGiaoDich:
                 self.ghi_tat_ca(danh_sach)
                 return True
         return False
-
     def xoa(self, ma_dinh_danh: str) -> bool:
         danh_sach = self.doc_tat_ca()
         moi = [gd for gd in danh_sach if gd.get("MaGD") != ma_dinh_danh]
         if len(moi) == len(danh_sach):
-            return False  
+            return False 
         self.ghi_tat_ca(moi)
         return True
-
-    def tim_khoan_vay_theo_ma_giao_dich(self, ma_dinh_danh: str) -> dict | None:
+    def tim_theo_id(self, ma_dinh_danh: str) -> dict | None:
         danh_sach = self.doc_tat_ca()
         for gd in danh_sach:
             if gd.get("MaGD") == ma_dinh_danh:
                 return gd
+        return None
+
+    def tim_khoan_vay_theo_ma_giao_dich(self, ma_dinh_danh: str) -> dict | None:
+        gd = self.tim_theo_id(ma_dinh_danh)
+        if not gd:
+            return None
+        if gd.get("LienKetVay"):
+            return gd
         return None
 
     def lay_theo_danh_muc(self, ma_nguoi_dung: str, danh_muc: str, ky_han: str) -> list:
