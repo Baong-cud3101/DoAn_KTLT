@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>805</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Financial Architect</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QMainWindow { background-color: #F8FAFC; }
+    QLabel { font-family: 'Segoe UI', 'Arial'; color: #1E293B; }
+    QFrame#card_thong_ke { background-color: white; border-radius: 15px; border: 1px solid #E2E8F0; }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="layout_main">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="sidebar">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+        QFrame#sidebar { background-color: #F1F5F9; border-right: 1px solid #E2E8F0; }
+        QPushButton { text-align: left; padding: 12px 20px; border: none; border-radius: 10px; font-size: 14px; color: #64748B; margin: 2px 15px; }
+        QPushButton:hover { background-color: #E2E8F0; color: #1E293B; }
+        QPushButton#btn_nav_dashboard { background-color: #DBEAFE; color: #1E40AF; font-weight: bold; }
+       </string>
+      </property>
+      <layout class="QVBoxLayout" name="layout_sidebar">
+       <item>
+        <widget class="QLabel" name="lbl_logo">
+         <property name="styleSheet">
+          <string>font-size: 22px; font-weight: bold; color: #1E40AF; margin: 25px;</string>
+         </property>
+         <property name="text">
+          <string>🏦 Tài chính</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_nav_dashboard">
+         <property name="text">
+          <string>Dashboard</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_nav_giaodich">
+         <property name="text">
+          <string>Giao dịch Thu-Chi</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_nav_ngansach">
+         <property name="text">
+          <string>Ngân sách</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_nav_dautu_tietkiem">
+         <property name="text">
+          <string>Đầu tư &amp; Tiết kiệm</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_nav_vayno">
+         <property name="text">
+          <string>Vay nợ</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer_sidebar">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QScrollArea" name="scroll_area_main">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scroll_content">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>1030</width>
+         <height>1002</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="layout_content_v">
+        <property name="spacing">
+         <number>25</number>
+        </property>
+        <property name="leftMargin">
+         <number>30</number>
+        </property>
+        <property name="topMargin">
+         <number>30</number>
+        </property>
+        <property name="rightMargin">
+         <number>30</number>
+        </property>
+        <property name="bottomMargin">
+         <number>30</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="layout_header">
+          <item>
+           <widget class="QLabel" name="lbl_tieu_de_chinh">
+            <property name="styleSheet">
+             <string>font-size: 26px; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>Financial Architect</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacer_header">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_icon_thongbao_user">
+            <property name="styleSheet">
+             <string>font-size: 18px;</string>
+            </property>
+            <property name="text">
+             <string>🔔 📤 👤</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="layout_the_thong_ke">
+          <item>
+           <widget class="QFrame" name="card_thong_ke">
+            <layout class="QVBoxLayout" name="layout_card_thu">
+             <item>
+              <widget class="QLabel" name="lbl_label_thu">
+               <property name="styleSheet">
+                <string>color: #64748B; font-size: 11px;</string>
+               </property>
+               <property name="text">
+                <string>THÁNG NÀY</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_text_thu">
+               <property name="styleSheet">
+                <string>font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Tổng thu tháng này</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_tong_thu">
+               <property name="styleSheet">
+                <string>font-size: 20px; font-weight: bold; color: #10B981;</string>
+               </property>
+               <property name="text">
+                <string>12.500.000 đ</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="card_thong_ke">
+            <layout class="QVBoxLayout" name="layout_card_chi">
+             <item>
+              <widget class="QLabel" name="lbl_label_chi">
+               <property name="styleSheet">
+                <string>color: #64748B; font-size: 11px;</string>
+               </property>
+               <property name="text">
+                <string>THÁNG NÀY</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_text_chi">
+               <property name="styleSheet">
+                <string>font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Tổng chi tháng này</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_tong_chi">
+               <property name="styleSheet">
+                <string>font-size: 20px; font-weight: bold; color: #EF4444;</string>
+               </property>
+               <property name="text">
+                <string>8.200.000 đ</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="card_thong_ke">
+            <layout class="QVBoxLayout" name="layout_card_sodu">
+             <item>
+              <widget class="QLabel" name="lbl_label_sodu">
+               <property name="styleSheet">
+                <string>color: #64748B; font-size: 11px;</string>
+               </property>
+               <property name="text">
+                <string>KHẢ DỤNG</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_text_sodu">
+               <property name="styleSheet">
+                <string>font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Số dư hiện tại</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_so_du">
+               <property name="styleSheet">
+                <string>font-size: 20px; font-weight: bold; color: #1E40AF;</string>
+               </property>
+               <property name="text">
+                <string>4.300.000 đ</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="card_thong_ke">
+            <layout class="QVBoxLayout" name="layout_card_ngansach">
+             <item>
+              <widget class="QLabel" name="lbl_label_ngansach">
+               <property name="styleSheet">
+                <string>color: #64748B; font-size: 11px;</string>
+               </property>
+               <property name="text">
+                <string>NGÂN SÁCH</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_text_ngansach">
+               <property name="styleSheet">
+                <string>font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Trạng thái</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_trangthai_ngansach">
+               <property name="styleSheet">
+                <string>font-size: 20px; font-weight: bold; color: #059669;</string>
+               </property>
+               <property name="text">
+                <string>An toàn ✅</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="layout_bieu_do">
+          <item>
+           <widget class="QFrame" name="frame_bieudo_giaodich">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>350</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="layout_inner_bieudo_bar">
+             <item>
+              <widget class="QLabel" name="lbl_tieu_de_bieudo_bar">
+               <property name="styleSheet">
+                <string>font-weight: bold; font-size: 16px;</string>
+               </property>
+               <property name="text">
+                <string>Biểu đồ Thu vs Chi (6 tháng)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_bieudo_cocau_chi">
+            <property name="maximumSize">
+             <size>
+              <width>350</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="layout_inner_bieudo_pie">
+             <item>
+              <widget class="QLabel" name="lbl_tieu_de_bieudo_pie">
+               <property name="styleSheet">
+                <string>font-weight: bold; font-size: 16px;</string>
+               </property>
+               <property name="text">
+                <string>Cơ cấu chi tiêu</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="layout_bottom">
+          <item>
+           <widget class="QFrame" name="frame_bang_giaodich">
+            <layout class="QVBoxLayout" name="layout_inner_bang">
+             <item>
+              <widget class="QLabel" name="lbl_tieu_de_bang">
+               <property name="styleSheet">
+                <string>font-weight: bold; font-size: 16px;</string>
+               </property>
+               <property name="text">
+                <string>Giao dịch gần nhất</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="tbl_giaodich_gan_nhat">
+               <property name="styleSheet">
+                <string>border: none; gridline-color: #F1F5F9;</string>
+               </property>
+               <property name="rowCount">
+                <number>5</number>
+               </property>
+               <property name="columnCount">
+                <number>4</number>
+               </property>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <column>
+                <property name="text">
+                 <string>Giao dịch</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Danh mục</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Số tiền</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Ngày</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="layout_alert_promo">
+            <property name="spacing">
+             <number>15</number>
+            </property>
+            <item>
+             <widget class="QFrame" name="frame_canhbao_ngansach">
+              <property name="styleSheet">
+               <string>background-color: #FEE2E2; border-radius: 12px; border: 1px solid #FECACA; padding: 15px;</string>
+              </property>
+              <layout class="QVBoxLayout" name="layout_inner_canhbao">
+               <item>
+                <widget class="QLabel" name="lbl_tieu_de_canhbao">
+                 <property name="styleSheet">
+                  <string>color: #B91C1C; font-weight: bold;</string>
+                 </property>
+                 <property name="text">
+                  <string>⚠️ Vượt ngân sách</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lbl_chi_tiet_canhbao">
+                 <property name="styleSheet">
+                  <string>color: #7F1D1D;</string>
+                 </property>
+                 <property name="text">
+                  <string>Bạn đã chi quá 500k so với hạn mức ngân sách.</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_promo_tietkiem">
+              <property name="styleSheet">
+               <string>background-color: #1E3A8A; border-radius: 12px; padding: 15px;</string>
+              </property>
+              <layout class="QVBoxLayout" name="layout_inner_promo">
+               <item>
+                <widget class="QLabel" name="lbl_bank_name">
+                 <property name="styleSheet">
+                  <string>color: white; font-weight: bold;</string>
+                 </property>
+                 <property name="text">
+                  <string>Vietcombank</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lbl_bank_rate">
+                 <property name="styleSheet">
+                  <string>color: #DBEAFE;</string>
+                 </property>
+                 <property name="text">
+                  <string>Lãi suất 6.5%/năm</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_mo_tietkiem">
+                 <property name="styleSheet">
+                  <string>background-color: #10B981; color: white; font-weight: bold; padding: 8px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Mở tiết kiệm ngay</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

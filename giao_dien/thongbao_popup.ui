@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_ThongBao</class>
+ <widget class="QDialog" name="Dialog_ThongBao">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>450</width><height>750</height></rect></property>
+  <property name="windowTitle"><string>Thông báo</string></property>
+  <property name="styleSheet">
+   <string notr="true">
+    QDialog { background-color: white; border-radius: 20px; }
+    QLabel { font-family: 'Segoe UI', sans-serif; border: none; }
+    QFrame#frame_item { border: none; border-bottom: 1px solid #F1F5F9; }
+    QFrame#frame_item[unread=&quot;true&quot;] { background-color: #F0F7FF; }
+    QLabel#lbl_item_tieude { font-weight: bold; color: #1E293B; font-size: 14px; }
+    QLabel#lbl_item_mota { color: #475569; font-size: 12px; line-height: 1.4; }
+    QLabel#lbl_item_thoigian { color: #94A3B8; font-size: 11px; }
+    QPushButton#btn_danhdau_tatca { color: #1E40AF; font-weight: bold; border: none; background: transparent; font-size: 13px; }
+    QPushButton#btn_thongbao_xem_tatca { background-color: #F0F4FF; color: #1E40AF; font-weight: bold; border: none; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_root">
+   <property name="spacing"><number>0</number></property>
+   <property name="margin"><number>0</number></property>
+   <!-- HEADER -->
+   <item>
+    <layout class="QHBoxLayout" name="layout_header">
+     <property name="contentsMargins"><number>20</number><number>25</number><number>20</number><number>15</number></property>
+     <item><widget class="QLabel" name="lbl_tieude_thongbao"><property name="text"><string>Thông báo</string></property><property name="styleSheet"><string>font-size: 20px; font-weight: bold; color: #1E293B;</string></property></widget></item>
+     <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+     <item><widget class="QPushButton" name="btn_thongbao_danhdau_tatca"><property name="text"><string>Đánh dấu tất cả đã đọc</string></property></widget></item>
+    </layout>
+   </item>
+   <!-- LIST CONTENT -->
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable"><bool>true</bool></property>
+     <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <layout class="QVBoxLayout" name="layout_list">
+       <property name="spacing"><number>0</number></property>
+       <property name="margin"><number>0</number></property>
+       <!-- ITEM 1: Ngân sách (NganSach) -->
+       <item>
+        <widget class="QFrame" name="frame_item">
+         <property name="unread" stdset="0"><bool>true</bool></property>
+         <layout class="QHBoxLayout" name="h1">
+          <property name="contentsMargins"><number>15</number><number>15</number><number>15</number><number>15</number></property>
+          <item><widget class="QLabel" name="lbl_icon_ngansach">
+           <property name="minimumSize"><size><width>48</width><height>48</height></size></property>
+           <property name="maximumSize"><size><width>48</width><height>48</height></size></property>
+           <property name="text"><string>⚠️</string></property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+           <property name="styleSheet"><string>background:#FEE2E2; border-radius:12px; font-size:20px; color:#EF4444;</string></property>
+          </widget></item>
+          <item>
+           <layout class="QVBoxLayout" name="v1">
+            <property name="leftMargin"><number>12</number></property>
+            <property name="spacing"><number>4</number></property>
+            <item><widget class="QLabel" name="lbl_item_tieude_ngansach"><property name="text"><string>Vượt ngân sách Mua sắm &amp; Giải trí</string></property><property name="styleSheet"><string>font-weight:bold; color:#1E293B;</string></property></widget></item>
+            <item><widget class="QLabel" name="lbl_item_mota_ngansach"><property name="text"><string>Bạn đã chi 2.450.000 đ, vượt 450.000 đ so với hạn mức tháng này.</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+            <item><widget class="QLabel" name="lbl_item_thoigian_ngansach"><property name="text"><string>2 phút trước</string></property></widget></item>
+           </layout>
+          </item>
+          <item><widget class="QLabel" name="lbl_unread_dot_ngansach"><property name="text"><string>●</string></property><property name="styleSheet"><string>color:#1E40AF; font-size:14px;</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+       <!-- ITEM 2: Vay nợ (VayNo) -->
+       <item>
+        <widget class="QFrame" name="frame_item">
+         <property name="unread" stdset="0"><bool>true</bool></property>
+         <layout class="QHBoxLayout" name="h2">
+          <property name="contentsMargins"><number>15</number><number>15</number><number>15</number><number>15</number></property>
+          <item><widget class="QLabel" name="lbl_icon_vayno">
+           <property name="minimumSize"><size><width>48</width><height>48</height></size></property>
+           <property name="maximumSize"><size><width>48</width><height>48</height></size></property>
+           <property name="text"><string>📅</string></property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+           <property name="styleSheet"><string>background:#FEF3C7; border-radius:12px; font-size:20px; color:#D97706;</string></property>
+          </widget></item>
+          <item>
+           <layout class="QVBoxLayout" name="v2">
+            <property name="leftMargin"><number>12</number></property>
+            <property name="spacing"><number>4</number></property>
+            <item><widget class="QLabel" name="lbl_item_tieude_vayno"><property name="text"><string>Đến hạn trả nợ thẻ tín dụng</string></property><property name="styleSheet"><string>font-weight:bold; color:#1E293B;</string></property></widget></item>
+            <item><widget class="QLabel" name="lbl_item_mota_vayno"><property name="text"><string>Hạn chót thanh toán: 20/06/2024. Số tiền: 2.300.000 đ</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+            <item><widget class="QLabel" name="lbl_item_thoigian_vayno"><property name="text"><string>1 giờ trước</string></property></widget></item>
+           </layout>
+          </item>
+          <item><widget class="QLabel" name="lbl_unread_dot_vayno"><property name="text"><string>●</string></property><property name="styleSheet"><string>color:#1E40AF; font-size:14px;</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+       <!-- ITEM 3: Tiết kiệm (TietKiem) -->
+       <item>
+        <widget class="QFrame" name="frame_item">
+         <property name="unread" stdset="0"><bool>false</bool></property>
+         <layout class="QHBoxLayout" name="h3">
+          <property name="contentsMargins"><number>15</number><number>15</number><number>15</number><number>15</number></property>
+          <item><widget class="QLabel" name="lbl_icon_tietkiem">
+           <property name="minimumSize"><size><width>48</width><height>48</height></size></property>
+           <property name="maximumSize"><size><width>48</width><height>48</height></size></property>
+           <property name="text"><string>📈</string></property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+           <property name="styleSheet"><string>background:#DCFCE7; border-radius:12px; font-size:20px; color:#059669;</string></property>
+          </widget></item>
+          <item>
+           <layout class="QVBoxLayout" name="v3">
+            <property name="leftMargin"><number>12</number></property>
+            <property name="spacing"><number>4</number></property>
+            <item><widget class="QLabel" name="lbl_item_tieude_tietkiem"><property name="text"><string>Lãi suất tiết kiệm MSB tăng lên 7.2%</string></property><property name="styleSheet"><string>font-weight:bold; color:#1E293B;</string></property></widget></item>
+            <item><widget class="QLabel" name="lbl_item_mota_tietkiem"><property name="text"><string>MSB vừa cập nhật lãi suất kỳ hạn 12 tháng.</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+            <item><widget class="QLabel" name="lbl_item_thoigian_tietkiem"><property name="text"><string>Hôm nay, 08:30</string></property></widget></item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item><spacer name="vSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <!-- FOOTER -->
+   <item>
+    <widget class="QPushButton" name="btn_thongbao_xem_tatca">
+     <property name="minimumHeight"><number>55</number></property>
+     <property name="text"><string>Xem tất cả thông báo</string></property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+</ui>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>420</width><height>650</height></rect>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QDialog { background-color: white; border-radius: 20px; }
+    QLabel#headerTitle { font-size: 18px; font-weight: bold; color: #001A41; }
+    QFrame#calcBox { background-color: #F8FAFF; border-radius: 12px; border: 1px solid #E2E8F0; }
+    QPushButton#btn_save { background-color: #002687; color: white; border-radius: 10px; font-weight: bold; padding: 15px; }
+    QPushButton#btn_outline { background-color: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 15px; color: #002687; }
+   </string>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="margin"><number>25</number></property>
+   <item>
+    <layout class="QHBoxLayout">
+     <item><widget class="QLabel" name="headerTitle"><property name="text"><string>Vietcombank</string></property></widget></item>
+     <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+     <item><widget class="QPushButton" name="btn_close"><property name="text"><string>✕</string></property><property name="styleSheet"><string>border:none; font-size:16px;</string></property></widget></item>
+    </layout>
+   </item>
+   <item><widget class="QLabel"><property name="text"><string>★ Lãi suất cao nhất</string></property><property name="styleSheet"><string>background: #DCFCE7; color: #059669; border-radius: 5px; padding: 5px;</string></property></widget></item>
+   <item><widget class="QLabel"><property name="text"><string>BẢNG LÃI SUẤT KỲ HẠN</string></property><property name="styleSheet"><string>font-size: 11px; font-weight: bold; color: #64748B; margin-top: 10px;</string></property></widget></item>
+   <item><widget class="QLabel"><property name="text"><string>12 tháng: 6.10%/năm</string></property><property name="styleSheet"><string>background: #F1F5FE; padding: 15px; font-weight: bold; border-radius: 8px;</string></property></widget></item>
+   <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+   <item>
+    <widget class="QFrame" name="calcBox">
+     <layout class="QVBoxLayout">
+      <item><widget class="QLabel"><property name="text"><string>Số tiền gửi</string></property></widget></item>
+      <item><widget class="QLineEdit"><property name="text"><string>100.000.000 đ</string></property><property name="styleSheet"><string>background: white; border: 1px solid #ddd; padding: 10px; font-size: 16px; font-weight: bold;</string></property></widget></item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item><widget class="QLabel"><property name="text"><string>TIỀN LÃI: 6.100.000 đ</string></property><property name="styleSheet"><string>color: #059669; font-weight: bold;</string></property></widget></item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item><widget class="QPushButton" name="btn_save"><property name="text"><string>Mở sổ tiết kiệm ngay →</string></property></widget></item>
+   <item><widget class="QPushButton" name="btn_outline"><property name="text"><string>So sánh ngân hàng khác</string></property></widget></item>
+  </layout>
+ </widget>
+</ui>

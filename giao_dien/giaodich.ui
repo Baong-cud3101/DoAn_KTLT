@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow_GiaoDich">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>850</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Quản lý Giao dịch - Financial Architect</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QMainWindow { background-color: #F8FAFC; }
+    QFrame#frame_sidebar { background-color: #F1F5F9; border-right: 1px solid #E2E8F0; }
+    /* Style cho các nút điều hướng sidebar */
+    QPushButton[objectName^="btn_nav_"] {
+        text-align: left; padding: 12px 20px; border: none;
+        border-radius: 8px; font-size: 14px; color: #64748B; margin: 2px 10px;
+    }
+    QPushButton[objectName^="btn_nav_"]:hover { background-color: #E2E8F0; color: #1E293B; }
+
+    /* Nút đang được chọn (Giao dịch) */
+    QPushButton#btn_nav_giaodich {
+        background-color: #DBEAFE;
+        color: #1E40AF;
+        font-weight: bold;
+    }
+    /* Style cho bảng danh sách */
+    QTableWidget#tbl_danhsach_giaodich { background-color: white; border: none; gridline-color: #F1F5F9; border-radius: 12px; }
+    QHeaderView::section { background-color: #EEF2FD; padding: 10px; border: none; font-weight: bold; color: #64748B; }
+   </string>
+  </property>
+  <!-- THANH MENU TRÊN CÙNG -->
+  <widget class="QMenuBar" name="menubar_chinh">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_tep_tin"><property name="title"><string>Tệp tin</string></property></widget>
+   <widget class="QMenu" name="menu_chinh_sua"><property name="title"><string>Chỉnh sửa</string></property></widget>
+   <widget class="QMenu" name="menu_tro_giup"><property name="title"><string>Trợ giúp</string></property></widget>
+  </widget>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="layout_tong_the">
+    <property name="spacing"><number>0</number></property>
+    <property name="margin"><number>0</number></property>
+    <!-- SIDEBAR -->
+    <item>
+     <widget class="QFrame" name="frame_sidebar">
+      <property name="minimumSize"><size><width>240</width><height>0</height></size></property>
+      <layout class="QVBoxLayout" name="layout_sidebar_v">
+       <property name="spacing"><number>2</number></property>
+       <item>
+        <widget class="QLabel" name="lbl_logo_app">
+         <property name="text"><string>🏦 Tài chính</string></property>
+         <property name="styleSheet"><string>font-size: 20px; font-weight: bold; color: #002D9C; margin: 20px 20px 30px 20px;</string></property>
+        </widget>
+       </item>
+       <item><widget class="QPushButton" name="btn_nav_dashboard"><property name="text"><string>Dashboard</string></property></widget></item>
+       <item><widget class="QPushButton" name="btn_nav_giaodich"><property name="text"><string>Giao dịch Thu-Chi</string></property></widget></item>
+       <item><widget class="QPushButton" name="btn_nav_ngansach"><property name="text"><string>Ngân sách</string></property></widget></item>
+       <item><widget class="QPushButton" name="btn_nav_dautu_tietkiem"><property name="text"><string>Đầu tư &amp; Tiết kiệm</string></property></widget></item>
+       <item><widget class="QPushButton" name="btn_nav_vayno"><property name="text"><string>Vay nợ</string></property></widget></item>
+       <item><widget class="QPushButton" name="btn_nav_baocao"><property name="text"><string>Báo cáo</string></property></widget></item>
+       <item><widget class="QPushButton" name="btn_nav_chatbot"><property name="text"><string>Chatbot</string></property></widget></item>
+       <item><spacer name="spacer_sidebar_v"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+       <item><widget class="QPushButton" name="btn_nav_caidat"><property name="text"><string>Cài đặt hệ thống</string></property></widget></item>
+      </layout>
+     </widget>
+    </item>
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <item>
+     <widget class="QWidget" name="widget_nội_dung_chính">
+      <layout class="QVBoxLayout" name="layout_noidung_v">
+       <property name="margin"><number>30</number></property>
+       <property name="spacing"><number>20</number></property>
+       <!-- Header nội dung -->
+       <item>
+        <layout class="QHBoxLayout" name="layout_noidung_header">
+         <item><widget class="QLabel" name="lbl_tieude_trang"><property name="text"><string>Giao dịch Thu-Chi</string></property><property name="styleSheet"><string>font-size: 22px; font-weight: bold;</string></property></widget></item>
+         <item><spacer name="spacer_noidung_header_h"><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+         <item><widget class="QLabel" name="lbl_user_info"><property name="text"><string>🔔  📤  👤</string></property><property name="styleSheet"><string>font-size: 16px;</string></property></widget></item>
+        </layout>
+       </item>
+       <!-- Thanh công cụ hành động -->
+       <item>
+        <layout class="QHBoxLayout" name="layout_actions">
+         <item>
+          <widget class="QPushButton" name="btn_them_giaodich">
+           <property name="text"><string>+ Thêm giao dịch</string></property>
+           <property name="styleSheet"><string>background-color: #002D9C; color: white; border-radius: 8px; padding: 10px 20px; font-weight: bold;</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_nhap_excel">
+           <property name="text"><string>📥 Import Excel</string></property>
+           <property name="styleSheet"><string>background-color: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 10px 15px;</string></property>
+          </widget>
+         </item>
+         <item><spacer name="spacer_actions_h"><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+         <item>
+          <widget class="QLineEdit" name="txt_timkiem_giaodich">
+           <property name="placeholderText"><string>Tìm kiếm giao dịch (Mô tả, Số tiền...)</string></property>
+           <property name="minimumSize"><size><width>280</width><height>38</height></size></property>
+           <property name="styleSheet"><string>background-color: white; border: 1px solid #E2E8F0; border-radius: 10px; padding-left: 15px;</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <!-- Bảng hiển thị danh sách Giao dịch -->
+       <item>
+        <widget class="QTableWidget" name="tbl_danhsach_giaodich">
+         <property name="columnCount"><number>6</number></property>
+         <property name="rowCount"><number>10</number></property>
+         <column><property name="text"><string>NGÀY</string></property></column>
+         <column><property name="text"><string>MÔ TẢ</string></property></column>
+         <column><property name="text"><string>DANH MỤC</string></property></column>
+         <column><property name="text"><string>LOẠI</string></property></column>
+         <column><property name="text"><string>SỐ TIỀN</string></property></column>
+         <column><property name="text"><string>THAO TÁC</string></property></column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar_chinh"/>
+ </widget>
+</ui>
