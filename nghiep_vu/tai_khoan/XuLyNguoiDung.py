@@ -24,16 +24,27 @@ import string
 import hashlib
 import base64
 import json
+
+
 class XuLyNguoiDung:
     THOI_GIAN_HET_HAN_OTP: int = 600
     SO_LAN_THU_TOI_DA: int = 5
     THOI_GIAN_KHOA_PHUT: int = 5
     SO_VONG_BAM_MUOI: int = 12
+
     def __init__(self):
-        self.otp_store = {}  #email:otp, expire_time
+        self.otp_store = {}
     def kiem_tra_hop_le(self, email: str, mat_khau: str) -> bool:
         pattern = r"[^@]+@[^@]+\.[^@]+"
         return re.match(pattern, email) and len(mat_khau) >= 6
+    def kiem_tra_do_manh_mat_khau(self, mat_khau: str) -> bool:
+        if len(mat_khau) < 6:
+            return False
+
+        has_letter = any(c.isalpha() for c in mat_khau)
+        has_digit = any(c.isdigit() for c in mat_khau)
+
+        return has_letter and has_digit
     def bam_mat_khau(self, mat_khau: str) -> str:
         salt = "salt123"
         return hashlib.sha256((mat_khau + salt).encode()).hexdigest()
@@ -62,10 +73,10 @@ class XuLyNguoiDung:
             return None
     def xac_thuc_nguoi_dung(self, email: str, mat_khau: str) -> dict:
         try:
-            with open("users.json", "r") as f:
+            with open("du_lieu/file_du_lieu/nguoi_dung.json", "r", encoding="utf-8") as f:
                 users = json.load(f)
         except:
-            return {"success": False, "message": "Chưa có dữ liệu"}
+            return {"success": False, "message": "KHONG_CO_DU_LIEU"}
 
         for u in users:
             if u["Email"] == email:
@@ -73,24 +84,26 @@ class XuLyNguoiDung:
                     token = self.tao_jwt(u["MaND"], "user")
                     return {"success": True, "token": token}
                 else:
-                    return {"success": False, "message": "Sai mật khẩu"}
+                    return {"success": False, "message": "SAI_MAT_KHAU"}
 
-        return {"success": False, "message": "Không tìm thấy user"}
+        return {"success": False, "message": "KHONG_TON_TAI"}
     def dang_ky(self, du_lieu: dict) -> dict:
         email = du_lieu.get("Email")
         mat_khau = du_lieu.get("MatKhau")
 
         if not self.kiem_tra_hop_le(email, mat_khau):
-            return {"success": False, "message": "Email hoặc mật khẩu không hợp lệ"}
+            return {"success": False, "message": "DU_LIEU_KHONG_HOP_LE"}
+
         try:
-            with open("users.json", "r") as f:
+            with open("du_lieu/file_du_lieu/nguoi_dung.json", "r", encoding="utf-8") as f:
                 users = json.load(f)
         except:
             users = []
 
         for u in users:
             if u["Email"] == email:
-                return {"success": False, "message": "Email đã tồn tại"}
+                return {"success": False, "message": "EMAIL_DA_TON_TAI"}
+
         ma_nd = "ND" + str(random.randint(10000, 99999))
 
         user = {
@@ -99,67 +112,32 @@ class XuLyNguoiDung:
             "MatKhauHash": self.bam_mat_khau(mat_khau),
             "HoTen": du_lieu.get("HoTen"),
             "SoDT": du_lieu.get("SoDT"),
-            "TrangThai": "CHUA_XAC_THUC"
+            "TrangThai": "CHUA_XAC_THUC",
+            "SoLanThu": 0
         }
+
         otp, expire = self.tao_ma_otp()
         self.otp_store[email] = (otp, expire)
 
         print(f"[OTP DEBUG] {email}: {otp}")
 
         users.append(user)
-        with open("users.json", "w") as f:
-            json.dump(users, f, indent=4)
+
+        with open("du_lieu/file_du_lieu/nguoi_dung.json", "w", encoding="utf-8") as f:
+            json.dump(users, f, indent=4, ensure_ascii=False)
 
         return {"success": True, "MaND": ma_nd}
+
     def cap_nhat_ho_so(self, ma_nguoi_dung: str, truong_du_lieu: dict):
         try:
-            with open("users.json", "r") as f:
+            with open("du_lieu/file_du_lieu/nguoi_dung.json", "r", encoding="utf-8") as f:
                 users = json.load(f)
         except:
             return
+
         for u in users:
             if u["MaND"] == ma_nguoi_dung:
                 u.update(truong_du_lieu)
-        with open("users.json", "w") as f:
-            json.dump(users, f, indent=4)
-    def doi_email(self, ma_nguoi_dung: str, email_moi: str, ma_otp: str):
-        if email_moi not in self.otp_store:
-            return False
 
-        otp, expire = self.otp_store[email_moi]
-
-        if not self.kiem_tra_ma_otp(ma_otp, otp, expire):
-            return False
-
-        try:
-            with open("users.json", "r") as f:
-                users = json.load(f)
-        except:
-            return False
-
-        for u in users:
-            if u["MaND"] == ma_nguoi_dung:
-                u["Email"] = email_moi
-
-        with open("users.json", "w") as f:
-            json.dump(users, f, indent=4)
-
-        return True
-    def dat_lai_mat_khau(self, ma_xac_thuc: str, mat_khau_moi: str):
-        data = self.xac_thuc_jwt(ma_xac_thuc)
-        if not data:
-            return False
-        ma_nd = data["ma_nd"]
-        try:
-            with open("users.json", "r") as f:
-                users = json.load(f)
-        except:
-            return False
-
-        for u in users:
-            if u["MaND"] == ma_nd:
-                u["MatKhauHash"] = self.bam_mat_khau(mat_khau_moi)
-
-        with open("users.json", "w") as f:
-            json.dump(users, f, indent=4)
-        return True
+        with open("du_lieu/file_du_lieu/nguoi_dung.json", "w", encoding="utf-8") as f:
+            json.dump(users, f, indent=4, ensure_ascii=False)
