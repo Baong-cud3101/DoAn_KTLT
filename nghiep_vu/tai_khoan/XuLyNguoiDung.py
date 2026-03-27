@@ -141,3 +141,14 @@ class XuLyNguoiDung:
 
         with open("du_lieu/file_du_lieu/nguoi_dung.json", "w", encoding="utf-8") as f:
             json.dump(users, f, indent=4, ensure_ascii=False)
+    def xoa_phien(self, ma_nguoi_dung: str, ma_xac_thuc: str):
+        try:
+            with open("du_lieu/file_du_lieu/nguoi_dung.json", "r", encoding="utf-8") as f:
+                users = json.load(f)
+        except:
+            return
+        for u in users:
+            if u["MaND"] == ma_nguoi_dung:
+                u["Session"] = None
+        with open("du_lieu/file_du_lieu/nguoi_dung.json", "w", encoding="utf-8") as f:
+            json.dump(users, f, indent=4, ensure_ascii=False)
