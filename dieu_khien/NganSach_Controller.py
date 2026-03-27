@@ -3,8 +3,8 @@
     #def lay_trang_thai_ngan_sach(self, ma_nguoi_dung: str): pass
     #def kiem_tra_canh_bao(self, ma_nguoi_dung: str, danh_muc: str, so_tien: float): pass
 
-from nghiep_vu.ngan_sach.XuLyNganSach import XuLyNganSach
-from du_lieu.LuuTruNganSach import LuuTruNganSach
+from nghiep_vu.XuLyNganSach import XuLyNganSach
+from du_lieu.kho_luu_tru.LuuTruNganSach import LuuTruNganSach
 class DieuKhienNganSach:
     def __init__(self):
         self.xu_ly = XuLyNganSach()
